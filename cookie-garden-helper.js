@@ -138,13 +138,13 @@ class Garden {
     if (plant.weed && config.autoHarvestWeeds) {
       this.harvest(x, y);
     }
-    let [seedId, age] = config.savedPlot[y][x];
-    seedId--;
-    if (config.autoHarvestCleanGarden &&
-        ((plant.unlocked && seedId == -1 && plant.plantable) ||
-         (seedId > -1 && seedId != plant.id && plant.plantable))
-        ) {
-      this.harvest(x, y);
+    if (config.autoHarvestCleanGarden && config.savedPlot.length > 0) {
+      let [seedId, age] = config.savedPlot[y][x];
+      seedId--;
+      if ((plant.unlocked && seedId == -1 && plant.plantable) ||
+          (seedId > -1 && seedId != plant.id && plant.plantable)) {
+        this.harvest(x, y);
+      }
     }
   }
 
